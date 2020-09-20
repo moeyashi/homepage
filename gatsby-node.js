@@ -5,3 +5,43 @@
  */
 
 // You can delete this file if you're not using it
+const path = require("path")
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+
+  const result = await graphql(
+    `
+      {
+        allMicrocmsPosts(sort: { fields: [publishedAt], order: DESC }) {
+          edges {
+            node {
+              id
+              title
+              body
+              tag {
+                id
+                name
+              }
+              publishedAt
+            }
+          }
+        }
+      }
+    `
+  );
+
+  if (result.errors) {
+    throw result.errors;
+  }
+
+  result.data.allMicrocmsPosts.edges.forEach((post, index) => {
+    createPage({
+      path: `/blog/${post.node.id}`,
+      component: path.resolve('./src/components/templates/blog.js'),
+      context: {
+        id: post.node.id,
+      },
+    });
+  });
+};
