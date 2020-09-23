@@ -34,12 +34,30 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
     {
+      resolve: 'gatsby-plugin-graphql-codegen',
+      options: {
+        fileName: `types/graphql-types.d.ts`
+      }
+    },
+    'gatsby-plugin-top-layout',
+    {
+      resolve: 'gatsby-plugin-material-ui',
+      // If you want to use styled components you should change the injection order.
+      options: {
+        // stylesProvider: {
+        //   injectFirst: true,
+        // },
+      },
+    },
+    {
       resolve: 'gatsby-source-microcms',
       options: {
         apiKey: process.env.MICROCMS_API_KEY,
         serviceId: process.env.MICROCMS_SERVICE_ID,
         apis: [{
           endpoint: 'posts',
+        },{
+          endpoint: 'categories',
         },{
           endpoint: 'tags',
         }],

@@ -1,15 +1,55 @@
 import React, { FC } from "react";
 import { useStaticQuery, graphql, Link } from "gatsby"
+import { Card, CardContent, CardHeader, CardMedia, Divider, Grid, Typography } from "@material-ui/core";
+import { MicrocmsPosts, PostsQueryQuery } from "../../../types/graphql-types"
+
+export type PostCardProps = {
+  id: string;
+  title: string;
+  body: string;
+  category?: string;
+  categoryImageURL?: string;  
+  tagnames?: string[];
+}
+
+export const PostCard: FC<PostCardProps> = ({
+  id,
+  title,
+  body,
+  category,
+  categoryImageURL,
+  tagnames,
+}) => (
+  <Card>
+    <CardMedia
+      component="img"
+      alt="post category image"
+      src={`${categoryImageURL}?h=100&fm=webp`}
+    />
+    <CardContent>
+      <Typography variant="caption" style={{ marginBottom: 8 }}>{category} {tagnames.join(",")}</Typography>
+      <Typography variant="h5" style={{ marginBottom: 8 }}>{title}</Typography>
+      <Typography noWrap>{body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')}</Typography>
+    </CardContent>
+  </Card>
+)
 
 export const Posts: FC = () => {
-  const data = useStaticQuery(graphql`
+  const data: PostsQueryQuery = useStaticQuery(graphql`
     query PostsQuery {
       allMicrocmsPosts(sort: {fields: publishedAt, order: DESC}) {
         edges {
           node {
             id
             title
-            tag {
+            body
+            category {
+              name
+              image {
+                url
+              }
+            }
+            tags {
               name
               id
             }
@@ -22,11 +62,22 @@ export const Posts: FC = () => {
   return (
     <div>
       <h2>記事一覧</h2>
-      <ul>
+      <Grid container spacing={2}>
         {data.allMicrocmsPosts.edges.map(edge => (
-          <li key={edge.node.id}><Link to={`/blog/${edge.node.id}`}>{edge.node.title}</Link></li>
+          <Grid item key={edge.node.id} xs={12} md={4}>
+            <Link to={`/blog/${edge.node.id}`} style={{ textDecoration: "none" }}>
+              <PostCard
+                id={edge.node.id}
+                title={edge.node.title}
+                body={edge.node.body}
+                category={edge.node.category.name}
+                categoryImageURL={edge.node.category.image.url}
+                tagnames={edge.node.tags.map(tag => tag.name)}
+              />
+            </Link>
+          </Grid>
         ))}
-      </ul>
+      </Grid>
     </div>
   )
 
