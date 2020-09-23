@@ -21,11 +21,10 @@ export const PostCard: FC<PostCardProps> = ({
   tagnames,
 }) => (
   <Card>
-    <CardMedia
-      component="img"
-      alt="post category image"
-      src={`${categoryImageURL}?h=100&fm=webp`}
-    />
+    <CardMedia component="picture">
+      <source srcSet={`${categoryImageURL}?h=100&fm=webp`} type="image/webp" />
+      <img src={`${categoryImageURL}?h=100`} alt="post category image" />
+    </CardMedia>
     <CardContent>
       <Typography variant="caption" style={{ marginBottom: 8 }}>{category} {tagnames.join(",")}</Typography>
       <Typography variant="h5" style={{ marginBottom: 8 }}>{title}</Typography>
