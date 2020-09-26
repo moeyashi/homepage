@@ -5,7 +5,8 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { createElement } from "react"
+import React, { createElement, FC } from "react"
+import Helmet from "react-helmet"
 import { graphql } from "gatsby"
 import unified, { Plugin } from "unified"
 import type { Element } from "hast"
@@ -25,10 +26,16 @@ const addDataToTwitterWidget: Plugin = () => {
   }
 }
 
+const Script: FC<any> = (props) => {
+  return (
+    <Helmet><script {...props} /></Helmet>
+  )
+}
+
 const processor = unified()
   .use(parse, { fragment: true })
   .use(addDataToTwitterWidget)
-  .use(rehype2react, { createElement })
+  .use(rehype2react, { createElement, components: { script: Script } })
 
 const Blog = ({ data: { microcmsPosts: post } }) => {
 
