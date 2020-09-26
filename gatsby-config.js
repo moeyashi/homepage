@@ -40,6 +40,7 @@ module.exports = {
         fileName: `types/graphql-types.d.ts`
       }
     },
+    'gatsby-plugin-twitter',
     'gatsby-plugin-top-layout',
     {
       resolve: 'gatsby-plugin-material-ui',

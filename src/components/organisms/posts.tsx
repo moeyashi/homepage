@@ -21,13 +21,13 @@ export const PostCard: FC<PostCardProps> = ({
   tagnames,
 }) => (
   <Card>
-    <CardMedia component="picture">
-      <source srcSet={`${categoryImageURL}?h=100&fm=webp`} type="image/webp" />
-      <img src={`${categoryImageURL}?h=100`} alt="post category image" />
+    <CardMedia component="picture" style={{ height: 120 }}>
+      <source srcSet={`${categoryImageURL}?h=120&fm=webp`} type="image/webp" />
+      <img src={`${categoryImageURL}?h=120`} alt="post category image" />
     </CardMedia>
     <CardContent>
       <Typography variant="caption" style={{ marginBottom: 8 }}>{category} {tagnames.join(",")}</Typography>
-      <Typography variant="h5" style={{ marginBottom: 8 }}>{title}</Typography>
+      <Typography variant="h3" style={{ marginBottom: 8, height: "2.334em", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden" }}>{title}</Typography>
       <Typography noWrap>{body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')}</Typography>
     </CardContent>
   </Card>
@@ -60,7 +60,7 @@ export const Posts: FC = () => {
 
   return (
     <div>
-      <h2>記事一覧</h2>
+      <Typography variant="h2">記事一覧</Typography>
       <Grid container spacing={2}>
         {data.allMicrocmsPosts.edges.map(edge => (
           <Grid item key={edge.node.id} xs={12} md={4}>
