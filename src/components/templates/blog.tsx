@@ -5,10 +5,30 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { createElement } from "react"
 import { graphql } from "gatsby"
+import unified, { Plugin } from "unified"
+import type { Element } from "hast"
+import parse from "rehype-parse"
+import rehype2react from "rehype-react"
+import visit from "unist-util-visit"
 
 import Layout from "../layout"
+
+const addDataToTwitterWidget: Plugin = () => {
+  return function(tree) {
+    visit(tree, "element", function(node: Element) {
+      if ((node.properties.className as string[])?.includes("twitter-timeline")) {
+        node.properties["data-height"] = "450"
+      }
+    })
+  }
+}
+
+const processor = unified()
+  .use(parse, { fragment: true })
+  .use(addDataToTwitterWidget)
+  .use(rehype2react, { createElement })
 
 const Blog = ({ data: { microcmsPosts: post } }) => {
 
@@ -16,11 +36,7 @@ const Blog = ({ data: { microcmsPosts: post } }) => {
     <Layout>
       <div>
         <h2>{post.title}</h2>
-        <div
-         dangerouslySetInnerHTML={{
-           __html: `${post.body}`,
-         }}
-       ></div>
+        <div>{processor.processSync(post.body).result}</div>
       </div>
     </Layout>
   )
