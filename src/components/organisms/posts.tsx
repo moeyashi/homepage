@@ -70,7 +70,7 @@ export const Posts: FC = () => {
                 title={edge.node.title}
                 body={edge.node.body}
                 category={edge.node.category.name}
-                categoryImageURL={edge.node.category.image.url}
+                categoryImageURL={edge.node.category.image?.url}
                 tagnames={edge.node.tags.map(tag => tag.name)}
               />
             </Link>
