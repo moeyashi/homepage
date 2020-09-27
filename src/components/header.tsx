@@ -3,7 +3,7 @@ import { Link } from "../components/atoms/Link"
 import React, { FC } from "react"
 
 export const Header: FC<{ siteTitle: string }> = ({ siteTitle = "" }) => (
-  <AppBar position="relative">
+  <AppBar position="relative" elevation={0}>
     <Container>
       <Toolbar variant="dense" disableGutters>
         <Link to="/" color="inherit"><Typography component="h1" variant="h6" color="inherit">

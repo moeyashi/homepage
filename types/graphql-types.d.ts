@@ -759,6 +759,158 @@ export type FloatQueryOperatorInput = {
   nin?: Maybe<Array<Maybe<Scalars['Float']>>>;
 };
 
+export type HtmlRehype = Node & {
+  html?: Maybe<Scalars['String']>;
+  htmlAst?: Maybe<Scalars['JSON']>;
+  tableOfContents?: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type HtmlRehypeConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<HtmlRehypeEdge>;
+  nodes: Array<HtmlRehype>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<HtmlRehypeGroupConnection>;
+};
+
+
+export type HtmlRehypeConnectionDistinctArgs = {
+  field: HtmlRehypeFieldsEnum;
+};
+
+
+export type HtmlRehypeConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: HtmlRehypeFieldsEnum;
+};
+
+export type HtmlRehypeEdge = {
+  next?: Maybe<HtmlRehype>;
+  node: HtmlRehype;
+  previous?: Maybe<HtmlRehype>;
+};
+
+export type HtmlRehypeFieldsEnum = 
+  | 'html'
+  | 'htmlAst'
+  | 'tableOfContents'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type';
+
+export type HtmlRehypeFilterInput = {
+  html?: Maybe<StringQueryOperatorInput>;
+  htmlAst?: Maybe<JsonQueryOperatorInput>;
+  tableOfContents?: Maybe<JsonQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type HtmlRehypeGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<HtmlRehypeEdge>;
+  nodes: Array<HtmlRehype>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type HtmlRehypeSortInput = {
+  fields?: Maybe<Array<Maybe<HtmlRehypeFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type ImageCropFocus = 
   | 'CENTER'
   | 'NORTH'
@@ -1290,6 +1442,15 @@ export type IntQueryOperatorInput = {
 };
 
 
+export type JsonQueryOperatorInput = {
+  eq?: Maybe<Scalars['JSON']>;
+  ne?: Maybe<Scalars['JSON']>;
+  in?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  nin?: Maybe<Array<Maybe<Scalars['JSON']>>>;
+  regex?: Maybe<Scalars['JSON']>;
+  glob?: Maybe<Scalars['JSON']>;
+};
+
 export type MicrocmsCategories = Node & {
   id: Scalars['ID'];
   parent?: Maybe<Node>;
@@ -1496,6 +1657,7 @@ export type MicrocmsPosts = Node & {
   category?: Maybe<MicrocmsPostsCategory>;
   tags?: Maybe<Array<Maybe<MicrocmsPostsTags>>>;
   postsId?: Maybe<Scalars['String']>;
+  childHtmlRehype?: Maybe<HtmlRehype>;
 };
 
 
@@ -1703,7 +1865,48 @@ export type MicrocmsPostsFieldsEnum =
   | 'tags___updatedAt'
   | 'tags___publishedAt'
   | 'tags___name'
-  | 'postsId';
+  | 'postsId'
+  | 'childHtmlRehype___html'
+  | 'childHtmlRehype___htmlAst'
+  | 'childHtmlRehype___tableOfContents'
+  | 'childHtmlRehype___id'
+  | 'childHtmlRehype___parent___id'
+  | 'childHtmlRehype___parent___parent___id'
+  | 'childHtmlRehype___parent___parent___children'
+  | 'childHtmlRehype___parent___children'
+  | 'childHtmlRehype___parent___children___id'
+  | 'childHtmlRehype___parent___children___children'
+  | 'childHtmlRehype___parent___internal___content'
+  | 'childHtmlRehype___parent___internal___contentDigest'
+  | 'childHtmlRehype___parent___internal___description'
+  | 'childHtmlRehype___parent___internal___fieldOwners'
+  | 'childHtmlRehype___parent___internal___ignoreType'
+  | 'childHtmlRehype___parent___internal___mediaType'
+  | 'childHtmlRehype___parent___internal___owner'
+  | 'childHtmlRehype___parent___internal___type'
+  | 'childHtmlRehype___children'
+  | 'childHtmlRehype___children___id'
+  | 'childHtmlRehype___children___parent___id'
+  | 'childHtmlRehype___children___parent___children'
+  | 'childHtmlRehype___children___children'
+  | 'childHtmlRehype___children___children___id'
+  | 'childHtmlRehype___children___children___children'
+  | 'childHtmlRehype___children___internal___content'
+  | 'childHtmlRehype___children___internal___contentDigest'
+  | 'childHtmlRehype___children___internal___description'
+  | 'childHtmlRehype___children___internal___fieldOwners'
+  | 'childHtmlRehype___children___internal___ignoreType'
+  | 'childHtmlRehype___children___internal___mediaType'
+  | 'childHtmlRehype___children___internal___owner'
+  | 'childHtmlRehype___children___internal___type'
+  | 'childHtmlRehype___internal___content'
+  | 'childHtmlRehype___internal___contentDigest'
+  | 'childHtmlRehype___internal___description'
+  | 'childHtmlRehype___internal___fieldOwners'
+  | 'childHtmlRehype___internal___ignoreType'
+  | 'childHtmlRehype___internal___mediaType'
+  | 'childHtmlRehype___internal___owner'
+  | 'childHtmlRehype___internal___type';
 
 export type MicrocmsPostsFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
@@ -1718,6 +1921,7 @@ export type MicrocmsPostsFilterInput = {
   category?: Maybe<MicrocmsPostsCategoryFilterInput>;
   tags?: Maybe<MicrocmsPostsTagsFilterListInput>;
   postsId?: Maybe<StringQueryOperatorInput>;
+  childHtmlRehype?: Maybe<HtmlRehypeFilterInput>;
 };
 
 export type MicrocmsPostsGroupConnection = {
@@ -2020,6 +2224,8 @@ export type Query = {
   allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  htmlRehype?: Maybe<HtmlRehype>;
+  allHtmlRehype: HtmlRehypeConnection;
   microcmsTags?: Maybe<MicrocmsTags>;
   allMicrocmsTags: MicrocmsTagsConnection;
   microcmsCategories?: Maybe<MicrocmsCategories>;
@@ -2203,6 +2409,25 @@ export type QueryAllImageSharpArgs = {
 };
 
 
+export type QueryHtmlRehypeArgs = {
+  html?: Maybe<StringQueryOperatorInput>;
+  htmlAst?: Maybe<JsonQueryOperatorInput>;
+  tableOfContents?: Maybe<JsonQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllHtmlRehypeArgs = {
+  filter?: Maybe<HtmlRehypeFilterInput>;
+  sort?: Maybe<HtmlRehypeSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryMicrocmsTagsArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -2259,6 +2484,7 @@ export type QueryMicrocmsPostsArgs = {
   category?: Maybe<MicrocmsPostsCategoryFilterInput>;
   tags?: Maybe<MicrocmsPostsTagsFilterListInput>;
   postsId?: Maybe<StringQueryOperatorInput>;
+  childHtmlRehype?: Maybe<HtmlRehypeFilterInput>;
 };
 
 
@@ -2818,6 +3044,12 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___resolve'
   | 'pluginCreator___name'
   | 'pluginCreator___version'
+  | 'pluginCreator___pluginOptions___plugins'
+  | 'pluginCreator___pluginOptions___plugins___resolve'
+  | 'pluginCreator___pluginOptions___plugins___id'
+  | 'pluginCreator___pluginOptions___plugins___name'
+  | 'pluginCreator___pluginOptions___plugins___version'
+  | 'pluginCreator___pluginOptions___plugins___pluginFilepath'
   | 'pluginCreator___pluginOptions___name'
   | 'pluginCreator___pluginOptions___path'
   | 'pluginCreator___pluginOptions___short_name'
@@ -2833,6 +3065,8 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___cacheDigest'
   | 'pluginCreator___pluginOptions___codegen'
   | 'pluginCreator___pluginOptions___fileName'
+  | 'pluginCreator___pluginOptions___classPrefix'
+  | 'pluginCreator___pluginOptions___noInlineHighlight'
   | 'pluginCreator___pluginOptions___apiKey'
   | 'pluginCreator___pluginOptions___serviceId'
   | 'pluginCreator___pluginOptions___apis'
@@ -3025,6 +3259,14 @@ export type SitePluginFieldsEnum =
   | 'resolve'
   | 'name'
   | 'version'
+  | 'pluginOptions___plugins'
+  | 'pluginOptions___plugins___resolve'
+  | 'pluginOptions___plugins___id'
+  | 'pluginOptions___plugins___name'
+  | 'pluginOptions___plugins___version'
+  | 'pluginOptions___plugins___pluginOptions___classPrefix'
+  | 'pluginOptions___plugins___pluginOptions___noInlineHighlight'
+  | 'pluginOptions___plugins___pluginFilepath'
   | 'pluginOptions___name'
   | 'pluginOptions___path'
   | 'pluginOptions___short_name'
@@ -3040,6 +3282,8 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___cacheDigest'
   | 'pluginOptions___codegen'
   | 'pluginOptions___fileName'
+  | 'pluginOptions___classPrefix'
+  | 'pluginOptions___noInlineHighlight'
   | 'pluginOptions___apiKey'
   | 'pluginOptions___serviceId'
   | 'pluginOptions___apis'
@@ -3160,6 +3404,7 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 };
 
 export type SitePluginPluginOptions = {
+  plugins?: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>;
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   short_name?: Maybe<Scalars['String']>;
@@ -3175,6 +3420,8 @@ export type SitePluginPluginOptions = {
   cacheDigest?: Maybe<Scalars['String']>;
   codegen?: Maybe<Scalars['Boolean']>;
   fileName?: Maybe<Scalars['String']>;
+  classPrefix?: Maybe<Scalars['String']>;
+  noInlineHighlight?: Maybe<Scalars['Boolean']>;
   apiKey?: Maybe<Scalars['String']>;
   serviceId?: Maybe<Scalars['String']>;
   apis?: Maybe<Array<Maybe<SitePluginPluginOptionsApis>>>;
@@ -3194,6 +3441,7 @@ export type SitePluginPluginOptionsApisFilterListInput = {
 };
 
 export type SitePluginPluginOptionsFilterInput = {
+  plugins?: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
   name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   short_name?: Maybe<StringQueryOperatorInput>;
@@ -3209,10 +3457,44 @@ export type SitePluginPluginOptionsFilterInput = {
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   codegen?: Maybe<BooleanQueryOperatorInput>;
   fileName?: Maybe<StringQueryOperatorInput>;
+  classPrefix?: Maybe<StringQueryOperatorInput>;
+  noInlineHighlight?: Maybe<BooleanQueryOperatorInput>;
   apiKey?: Maybe<StringQueryOperatorInput>;
   serviceId?: Maybe<StringQueryOperatorInput>;
   apis?: Maybe<SitePluginPluginOptionsApisFilterListInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsPlugins = {
+  resolve?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+  pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptions>;
+  pluginFilepath?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsPluginsFilterInput = {
+  resolve?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  version?: Maybe<StringQueryOperatorInput>;
+  pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptionsFilterInput>;
+  pluginFilepath?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsPluginsFilterListInput = {
+  elemMatch?: Maybe<SitePluginPluginOptionsPluginsFilterInput>;
+};
+
+export type SitePluginPluginOptionsPluginsPluginOptions = {
+  classPrefix?: Maybe<Scalars['String']>;
+  noInlineHighlight?: Maybe<Scalars['Boolean']>;
+};
+
+export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
+  classPrefix?: Maybe<StringQueryOperatorInput>;
+  noInlineHighlight?: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginSortInput = {
@@ -3276,7 +3558,10 @@ export type BlogQueryVariables = Exact<{
 }>;
 
 
-export type BlogQuery = { microcmsPosts?: Maybe<Pick<MicrocmsPosts, 'title' | 'body'>> };
+export type BlogQuery = { microcmsPosts?: Maybe<(
+    Pick<MicrocmsPosts, 'title' | 'body'>
+    & { childHtmlRehype?: Maybe<Pick<HtmlRehype, 'htmlAst'>> }
+  )> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

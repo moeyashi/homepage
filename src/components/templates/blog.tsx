@@ -9,12 +9,11 @@ import React, { createElement, FC } from "react"
 import { graphql } from "gatsby"
 import unified, { Plugin } from "unified"
 import type { Element } from "hast"
-import parse from "rehype-parse"
 import rehype2react from "rehype-react"
 import visit from "unist-util-visit"
 
-import { BlogQuery } from "../../../types/graphql-types"
-import Layout from "../layout"
+import type { BlogQuery } from "../../../types/graphql-types"
+import { Layout } from "../layout"
 import { SEO } from "../seo"
 
 const addDataToTwitterWidget: Plugin = () => {
@@ -33,7 +32,6 @@ const Script: FC = () => {
 }
 
 const processor = unified()
-  .use(parse, { fragment: true })
   .use(addDataToTwitterWidget)
   .use(rehype2react, { createElement, components: { script: Script } })
 
@@ -43,9 +41,10 @@ const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
     <Layout>
       <SEO title={post.title} description={post.body?.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')} lang="ja" />
       <div>
-        <div><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
         <h2>{post.title}</h2>
-        <div>{processor.processSync(post.body).result}</div>
+        <div><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
+        <div>{processor.stringify(post.childHtmlRehype?.htmlAst)}</div>
+        <div style={{ marginTop: "2rem" }}><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
       </div>
     </Layout>
   )
@@ -58,6 +57,9 @@ export const query = graphql`
    microcmsPosts(id: { eq: $id }) {
      title
      body
+     childHtmlRehype {
+       htmlAst
+     }
    }
  }
 `
