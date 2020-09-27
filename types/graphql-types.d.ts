@@ -3268,11 +3268,6 @@ export type Unnamed_1_QueryVariables = Exact<{
 
 export type Unnamed_1_Query = { microcmsPosts?: Maybe<Pick<MicrocmsPosts, 'title' | 'body'>> };
 
-export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_2_Query = { site?: Maybe<Pick<Site, 'buildTime'>> };
-
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 export type GatsbyImageSharpFixed_TracedSvgFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
