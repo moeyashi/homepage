@@ -13,7 +13,9 @@ import parse from "rehype-parse"
 import rehype2react from "rehype-react"
 import visit from "unist-util-visit"
 
+import { BlogQuery } from "../../../types/graphql-types"
 import Layout from "../layout"
+import { SEO } from "../seo"
 
 const addDataToTwitterWidget: Plugin = () => {
   return function(tree) {
@@ -35,10 +37,11 @@ const processor = unified()
   .use(addDataToTwitterWidget)
   .use(rehype2react, { createElement, components: { script: Script } })
 
-const Blog = ({ data: { microcmsPosts: post } }) => {
+const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
 
   return (
     <Layout>
+      <SEO title={post.title} description={post.body?.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')} lang="ja" />
       <div>
         <div><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
         <h2>{post.title}</h2>
@@ -51,7 +54,7 @@ const Blog = ({ data: { microcmsPosts: post } }) => {
 export default Blog
 
 export const query = graphql`
- query($id: String!) {
+ query Blog($id: String!) {
    microcmsPosts(id: { eq: $id }) {
      title
      body

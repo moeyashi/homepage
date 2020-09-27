@@ -3261,12 +3261,17 @@ export type PostsQueryQuery = { allMicrocmsPosts: { edges: Array<{ node: (
         )>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'name' | 'id'>>>> }
       ) }> } };
 
-export type Unnamed_1_QueryVariables = Exact<{
+export type SeoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SeoQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
+export type BlogQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type Unnamed_1_Query = { microcmsPosts?: Maybe<Pick<MicrocmsPosts, 'title' | 'body'>> };
+export type BlogQuery = { microcmsPosts?: Maybe<Pick<MicrocmsPosts, 'title' | 'body'>> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
