@@ -9,6 +9,8 @@ import React, { createElement, FC } from "react"
 import { graphql } from "gatsby"
 import unified, { Plugin } from "unified"
 import type { Element } from "hast"
+import rehype from "rehype-parse"
+import hljs from "rehype-highlight"
 import rehype2react from "rehype-react"
 import visit from "unist-util-visit"
 
@@ -32,6 +34,13 @@ const Script: FC = () => {
 }
 
 const processor = unified()
+  .use(rehype, { fragment: true })
+  .use(hljs, {
+    subset: ["json", "typescript", "ts", "html", "css", "scss", "python", "py", "yml", "yaml", "bash", "sh"],
+    aliases: {
+      ts: "tsx"
+    }
+  })
   .use(addDataToTwitterWidget)
   .use(rehype2react, { createElement, components: { script: Script } })
 
@@ -43,7 +52,7 @@ const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
       <div>
         <h2>{post.title}</h2>
         <div><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
-        <div>{processor.stringify(post.childHtmlRehype?.htmlAst)}</div>
+        <div>{processor.processSync(post.body).result}</div>
         <div style={{ marginTop: "2rem" }}><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
       </div>
     </Layout>
