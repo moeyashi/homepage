@@ -3250,6 +3250,11 @@ export type StringQueryOperatorInput = {
   glob?: Maybe<Scalars['String']>;
 };
 
+export type LayoutQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LayoutQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+
 export type PostsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
