@@ -20,9 +20,9 @@ export const Footer: FC = () => {
     <AppBar color="secondary" position="relative" elevation={0}>
       <Container>
         <Toolbar variant="dense" disableGutters>
-          <Grid container>
+          <Grid container style={{ paddingTop: "1rem", paddingBottom: "2rem" }}>
             <Grid item xs={12}>
-              <Typography component="div" variant="h6" style={{ paddingTop: "0.5em", paddingBottom: "0.5em" }}>
+              <Typography component="div" variant="h6">
                 <Link to="/" variant="inherit" color="inherit">
                   {data.site?.siteMetadata?.title || "Title"}
                 </Link>
@@ -31,7 +31,7 @@ export const Footer: FC = () => {
             <Grid item xs={12}>
               <Typography><Link to="/" variant="inherit" color="inherit">記事一覧</Link></Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{ paddingTop: "2rem" }}>
               <Typography align="center">© 2020 {data.site?.siteMetadata?.author || 'ren adachi'}</Typography>
             </Grid>
           </Grid>
