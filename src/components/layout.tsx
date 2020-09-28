@@ -6,36 +6,26 @@
  */
 
 import React, { FC } from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import { Container } from "@material-ui/core"
 
 import Header from "./header"
-import type { LayoutQuery } from "../../types/graphql-types"
 import "./layout.css"
+import { Footer } from "./Footer"
 
 export const Layout: FC = ({ children }) => {
-  const data: LayoutQuery = useStaticQuery(graphql`
-    query Layout {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <Container>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Header />
+      <Container style={{ marginBottom: "2em" }}>
         <main>{children}</main>
       </Container>
-      <footer style={{
-        marginTop: `2rem`
+      <div style={{
+        marginTop: `auto`
       }}>
-        <Container>© 2020 ren adachi</Container>
-      </footer>
-    </>
+        <Footer />
+      </div>
+    </div>
   )
 }
 

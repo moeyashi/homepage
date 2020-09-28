@@ -3,7 +3,7 @@ require("dotenv").config({
 })
 module.exports = {
   siteMetadata: {
-    title: `麻雀SEのブログ`,
+    title: `r315dr`,
     description: `麻雀の様子やSEとしての備忘録などを残します。ときどきポーカーも。`,
     author: `ren adachi`,
     siteUrl: `https://r315dr.tk`
