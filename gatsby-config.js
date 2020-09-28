@@ -6,6 +6,7 @@ module.exports = {
     title: `麻雀SEのブログ`,
     description: `麻雀の様子やSEとしての備忘録などを残します。ときどきポーカーも。`,
     author: `ren adachi`,
+    siteUrl: `https://r315dr.tk`
   },
   plugins: [
     {
@@ -120,5 +121,6 @@ module.exports = {
         }],
       },
     },
+    `gatsby-plugin-sitemap`
   ],
 }
