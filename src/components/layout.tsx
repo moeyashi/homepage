@@ -28,7 +28,7 @@ export const Layout: FC = ({ children }) => {
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <Container>
-        <main style={{ marginTop: "2rem" }}>{children}</main>
+        <main>{children}</main>
       </Container>
       <footer style={{
         marginTop: `2rem`
