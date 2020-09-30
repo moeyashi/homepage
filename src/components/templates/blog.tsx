@@ -17,6 +17,7 @@ import visit from "unist-util-visit"
 import type { BlogQuery } from "../../../types/graphql-types"
 import { Layout } from "../layout"
 import { SEO } from "../seo"
+import { Box, Chip } from "@material-ui/core"
 
 const addDataToTwitterWidget: Plugin = () => {
   return function(tree) {
@@ -50,10 +51,18 @@ const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
     <Layout>
       <SEO title={post.title} description={post.body?.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')} lang="ja" />
       <div>
+        <Box my={2}><Chip label={post.category?.name} color="secondary" /></Box>
         <h2>{post.title}</h2>
+        <Box my={2}>
+          <ul style={{ listStyle: 'none', padding: 0, display: 'flex' }}>
+            {post.tags?.map(tag => <li key={tag.name} style={{ margin: 4 }}><Chip size="small" label={tag.name} /></li>)}
+          </ul>
+        </Box>
         <div><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
         <div>{processor.processSync(post.body).result}</div>
-        <div style={{ marginTop: "2rem" }}><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
+        <div style={{ marginTop: "2rem" }}>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a>
+        </div>
       </div>
     </Layout>
   )
@@ -68,6 +77,13 @@ export const query = graphql`
      body
      childHtmlRehype {
        htmlAst
+     }
+     category {
+       name
+     }
+     tags {
+       id
+       name
      }
    }
  }

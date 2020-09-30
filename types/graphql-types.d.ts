@@ -3580,7 +3580,7 @@ export type BlogQueryVariables = Exact<{
 
 export type BlogQuery = { microcmsPosts?: Maybe<(
     Pick<MicrocmsPosts, 'title' | 'body'>
-    & { childHtmlRehype?: Maybe<Pick<HtmlRehype, 'htmlAst'>> }
+    & { childHtmlRehype?: Maybe<Pick<HtmlRehype, 'htmlAst'>>, category?: Maybe<Pick<MicrocmsPostsCategory, 'name'>>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'id' | 'name'>>>> }
   )> };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
