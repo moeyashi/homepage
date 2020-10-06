@@ -18,6 +18,7 @@ import type { BlogQuery } from "../../../types/graphql-types"
 import { Layout } from "../layout"
 import { SEO } from "../seo"
 import { Box, Chip } from "@material-ui/core"
+import { Breadcrumbs } from "../organisms/Breadcrumbs"
 
 const addDataToTwitterWidget: Plugin = () => {
   return function(tree) {
@@ -47,11 +48,17 @@ const processor = unified()
 
 const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
 
+  const breadItems = [
+    { text: "記事一覧", to: "/" },
+    { text: post.category?.name || "category" },
+    { text: post.title || "name" },
+  ]
+
   return (
     <Layout>
       <SEO title={post.title} description={post.body?.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')} lang="ja" />
       <div>
-        <Box my={2}><Chip label={post.category?.name} color="secondary" /></Box>
+        <Box my={2}><Breadcrumbs items={breadItems} /></Box>
         <h2>{post.title}</h2>
         <Box my={2}>
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex' }}>
