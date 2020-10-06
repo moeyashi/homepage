@@ -6,7 +6,7 @@ module.exports = {
     title: `r315dr`,
     description: `麻雀の様子やSEとしての備忘録などを残します。ときどきポーカーも。`,
     author: `ren adachi`,
-    siteUrl: `https://r315dr.tk`
+    siteUrl: `https://r315dr.tk/`
   },
   plugins: [
     {
