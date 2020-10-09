@@ -33,6 +33,29 @@ export const PostCard: FC<PostCardProps> = ({
   </Card>
 )
 
+export type PostCardsProps = {
+  posts: PostsQueryQuery["allMicrocmsPosts"]["edges"]
+}
+
+export const PostCards: FC<PostCardsProps> = ({ posts }) => (
+  <Grid container spacing={2}>
+    {posts.map(edge => (
+      <Grid item key={edge.node.postsId} xs={12} md={4}>
+        <Link to={`/blog/posts/${edge.node.postsId}`} style={{ textDecoration: "none" }}>
+          <PostCard
+            id={edge.node.postsId}
+            title={edge.node.title}
+            body={edge.node.body}
+            category={edge.node.category.name}
+            categoryImageURL={edge.node.category.image?.url}
+            tagnames={edge.node.tags.map(tag => tag.name)}
+          />
+        </Link>
+      </Grid>
+    ))}
+  </Grid>
+)
+
 export const Posts: FC = () => {
   const data: PostsQueryQuery = useStaticQuery(graphql`
     query PostsQuery {
@@ -40,6 +63,7 @@ export const Posts: FC = () => {
         edges {
           node {
             id
+            postsId
             title
             body
             category {
@@ -61,22 +85,7 @@ export const Posts: FC = () => {
   return (
     <div>
       <Typography variant="h2">記事一覧</Typography>
-      <Grid container spacing={2}>
-        {data.allMicrocmsPosts.edges.map(edge => (
-          <Grid item key={edge.node.id} xs={12} md={4}>
-            <Link to={`/blog/${edge.node.id}`} style={{ textDecoration: "none" }}>
-              <PostCard
-                id={edge.node.id}
-                title={edge.node.title}
-                body={edge.node.body}
-                category={edge.node.category.name}
-                categoryImageURL={edge.node.category.image?.url}
-                tagnames={edge.node.tags.map(tag => tag.name)}
-              />
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
+      <PostCards posts={data.allMicrocmsPosts.edges} />
     </div>
   )
 

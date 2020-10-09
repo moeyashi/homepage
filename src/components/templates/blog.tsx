@@ -50,7 +50,7 @@ const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
 
   const breadItems = [
     { text: "記事一覧", to: "/" },
-    { text: post.category?.name || "category" },
+    { text: post.category?.name || "category", to: `/blog/categories/${post.category?.name_for_url}` },
     { text: post.title || "name" },
   ]
 
@@ -79,13 +79,14 @@ export default Blog
 
 export const query = graphql`
  query Blog($id: String!) {
-   microcmsPosts(id: { eq: $id }) {
+   microcmsPosts(postsId: { eq: $id }) {
      title
      body
      childHtmlRehype {
        htmlAst
      }
      category {
+       name_for_url
        name
      }
      tags {

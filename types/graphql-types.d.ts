@@ -1460,6 +1460,7 @@ export type MicrocmsCategories = Node & {
   updatedAt?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['Date']>;
   name?: Maybe<Scalars['String']>;
+  name_for_url?: Maybe<Scalars['String']>;
   image?: Maybe<MicrocmsCategoriesImage>;
   categoriesId?: Maybe<Scalars['String']>;
 };
@@ -1606,6 +1607,7 @@ export type MicrocmsCategoriesFieldsEnum =
   | 'updatedAt'
   | 'publishedAt'
   | 'name'
+  | 'name_for_url'
   | 'image___url'
   | 'categoriesId';
 
@@ -1618,6 +1620,7 @@ export type MicrocmsCategoriesFilterInput = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
+  name_for_url?: Maybe<StringQueryOperatorInput>;
   image?: Maybe<MicrocmsCategoriesImageFilterInput>;
   categoriesId?: Maybe<StringQueryOperatorInput>;
 };
@@ -1690,6 +1693,7 @@ export type MicrocmsPostsCategory = {
   updatedAt?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['Date']>;
   name?: Maybe<Scalars['String']>;
+  name_for_url?: Maybe<Scalars['String']>;
   image?: Maybe<MicrocmsPostsCategoryImage>;
 };
 
@@ -1723,6 +1727,7 @@ export type MicrocmsPostsCategoryFilterInput = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
+  name_for_url?: Maybe<StringQueryOperatorInput>;
   image?: Maybe<MicrocmsPostsCategoryImageFilterInput>;
 };
 
@@ -1858,6 +1863,7 @@ export type MicrocmsPostsFieldsEnum =
   | 'category___updatedAt'
   | 'category___publishedAt'
   | 'category___name'
+  | 'category___name_for_url'
   | 'category___image___url'
   | 'tags'
   | 'tags___id'
@@ -2458,6 +2464,7 @@ export type QueryMicrocmsCategoriesArgs = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
+  name_for_url?: Maybe<StringQueryOperatorInput>;
   image?: Maybe<MicrocmsCategoriesImageFilterInput>;
   categoriesId?: Maybe<StringQueryOperatorInput>;
 };
@@ -3550,7 +3557,7 @@ export type StringQueryOperatorInput = {
 export type FooterQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FooterQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'author'>> }> };
+export type FooterQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title' | 'author'>> }>, allMicrocmsCategories: { edges: Array<{ node: Pick<MicrocmsCategories, 'name' | 'name_for_url'> }> } };
 
 export type HeaderQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3561,7 +3568,7 @@ export type PostsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PostsQueryQuery = { allMicrocmsPosts: { edges: Array<{ node: (
-        Pick<MicrocmsPosts, 'id' | 'title' | 'body'>
+        Pick<MicrocmsPosts, 'id' | 'postsId' | 'title' | 'body'>
         & { category?: Maybe<(
           Pick<MicrocmsPostsCategory, 'name'>
           & { image?: Maybe<Pick<MicrocmsPostsCategoryImage, 'url'>> }
@@ -3580,8 +3587,21 @@ export type BlogQueryVariables = Exact<{
 
 export type BlogQuery = { microcmsPosts?: Maybe<(
     Pick<MicrocmsPosts, 'title' | 'body'>
-    & { childHtmlRehype?: Maybe<Pick<HtmlRehype, 'htmlAst'>>, category?: Maybe<Pick<MicrocmsPostsCategory, 'name'>>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'id' | 'name'>>>> }
+    & { childHtmlRehype?: Maybe<Pick<HtmlRehype, 'htmlAst'>>, category?: Maybe<Pick<MicrocmsPostsCategory, 'name_for_url' | 'name'>>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'id' | 'name'>>>> }
   )> };
+
+export type CategoryQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type CategoryQuery = { microcmsCategories?: Maybe<Pick<MicrocmsCategories, 'name'>>, allMicrocmsPosts: { edges: Array<{ node: (
+        Pick<MicrocmsPosts, 'id' | 'postsId' | 'title' | 'body'>
+        & { category?: Maybe<(
+          Pick<MicrocmsPostsCategory, 'name'>
+          & { image?: Maybe<Pick<MicrocmsPostsCategoryImage, 'url'>> }
+        )>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'name' | 'id'>>>> }
+      ) }> } };
 
 export type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
