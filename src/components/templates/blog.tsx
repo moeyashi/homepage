@@ -6,7 +6,7 @@
  */
 
 import React, { createElement, FC } from "react"
-import { graphql } from "gatsby"
+import { graphql, Link as GLink } from "gatsby"
 import unified, { Plugin } from "unified"
 import type { Element } from "hast"
 import rehype from "rehype-parse"
@@ -62,7 +62,11 @@ const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
         <h2>{post.title}</h2>
         <Box my={2}>
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex' }}>
-            {post.tags?.map(tag => <li key={tag.name} style={{ margin: 4 }}><Chip size="small" label={tag.name} /></li>)}
+            {post.tags?.map(tag => (
+              <li key={tag.name} style={{ margin: 4 }}>
+                <Chip size="small" label={tag.name} component={GLink} to={`/blog/tags/${tag.name_for_url}`} clickable />
+              </li>
+            ))}
           </ul>
         </Box>
         <div><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a></div>
@@ -92,6 +96,7 @@ export const query = graphql`
      tags {
        id
        name
+       name_for_url
      }
    }
  }

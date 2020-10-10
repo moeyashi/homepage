@@ -1462,6 +1462,7 @@ export type MicrocmsCategories = Node & {
   name?: Maybe<Scalars['String']>;
   name_for_url?: Maybe<Scalars['String']>;
   image?: Maybe<MicrocmsCategoriesImage>;
+  image_bg_color?: Maybe<Scalars['String']>;
   categoriesId?: Maybe<Scalars['String']>;
 };
 
@@ -1609,6 +1610,7 @@ export type MicrocmsCategoriesFieldsEnum =
   | 'name'
   | 'name_for_url'
   | 'image___url'
+  | 'image_bg_color'
   | 'categoriesId';
 
 export type MicrocmsCategoriesFilterInput = {
@@ -1622,6 +1624,7 @@ export type MicrocmsCategoriesFilterInput = {
   name?: Maybe<StringQueryOperatorInput>;
   name_for_url?: Maybe<StringQueryOperatorInput>;
   image?: Maybe<MicrocmsCategoriesImageFilterInput>;
+  image_bg_color?: Maybe<StringQueryOperatorInput>;
   categoriesId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -1695,6 +1698,7 @@ export type MicrocmsPostsCategory = {
   name?: Maybe<Scalars['String']>;
   name_for_url?: Maybe<Scalars['String']>;
   image?: Maybe<MicrocmsPostsCategoryImage>;
+  image_bg_color?: Maybe<Scalars['String']>;
 };
 
 
@@ -1729,6 +1733,7 @@ export type MicrocmsPostsCategoryFilterInput = {
   name?: Maybe<StringQueryOperatorInput>;
   name_for_url?: Maybe<StringQueryOperatorInput>;
   image?: Maybe<MicrocmsPostsCategoryImageFilterInput>;
+  image_bg_color?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MicrocmsPostsCategoryImage = {
@@ -1865,12 +1870,14 @@ export type MicrocmsPostsFieldsEnum =
   | 'category___name'
   | 'category___name_for_url'
   | 'category___image___url'
+  | 'category___image_bg_color'
   | 'tags'
   | 'tags___id'
   | 'tags___createdAt'
   | 'tags___updatedAt'
   | 'tags___publishedAt'
   | 'tags___name'
+  | 'tags___name_for_url'
   | 'postsId'
   | 'childHtmlRehype___html'
   | 'childHtmlRehype___htmlAst'
@@ -1950,6 +1957,7 @@ export type MicrocmsPostsTags = {
   updatedAt?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['Date']>;
   name?: Maybe<Scalars['String']>;
+  name_for_url?: Maybe<Scalars['String']>;
 };
 
 
@@ -1982,6 +1990,7 @@ export type MicrocmsPostsTagsFilterInput = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
+  name_for_url?: Maybe<StringQueryOperatorInput>;
 };
 
 export type MicrocmsPostsTagsFilterListInput = {
@@ -1997,6 +2006,7 @@ export type MicrocmsTags = Node & {
   updatedAt?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['Date']>;
   name?: Maybe<Scalars['String']>;
+  name_for_url?: Maybe<Scalars['String']>;
   tagsId?: Maybe<Scalars['String']>;
 };
 
@@ -2142,6 +2152,7 @@ export type MicrocmsTagsFieldsEnum =
   | 'updatedAt'
   | 'publishedAt'
   | 'name'
+  | 'name_for_url'
   | 'tagsId';
 
 export type MicrocmsTagsFilterInput = {
@@ -2153,6 +2164,7 @@ export type MicrocmsTagsFilterInput = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
+  name_for_url?: Maybe<StringQueryOperatorInput>;
   tagsId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2443,6 +2455,7 @@ export type QueryMicrocmsTagsArgs = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   publishedAt?: Maybe<DateQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
+  name_for_url?: Maybe<StringQueryOperatorInput>;
   tagsId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2466,6 +2479,7 @@ export type QueryMicrocmsCategoriesArgs = {
   name?: Maybe<StringQueryOperatorInput>;
   name_for_url?: Maybe<StringQueryOperatorInput>;
   image?: Maybe<MicrocmsCategoriesImageFilterInput>;
+  image_bg_color?: Maybe<StringQueryOperatorInput>;
   categoriesId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -3570,7 +3584,7 @@ export type PostsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 export type PostsQueryQuery = { allMicrocmsPosts: { edges: Array<{ node: (
         Pick<MicrocmsPosts, 'id' | 'postsId' | 'title' | 'body'>
         & { category?: Maybe<(
-          Pick<MicrocmsPostsCategory, 'name'>
+          Pick<MicrocmsPostsCategory, 'name' | 'image_bg_color'>
           & { image?: Maybe<Pick<MicrocmsPostsCategoryImage, 'url'>> }
         )>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'name' | 'id'>>>> }
       ) }> } };
@@ -3587,7 +3601,7 @@ export type BlogQueryVariables = Exact<{
 
 export type BlogQuery = { microcmsPosts?: Maybe<(
     Pick<MicrocmsPosts, 'title' | 'body'>
-    & { childHtmlRehype?: Maybe<Pick<HtmlRehype, 'htmlAst'>>, category?: Maybe<Pick<MicrocmsPostsCategory, 'name_for_url' | 'name'>>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'id' | 'name'>>>> }
+    & { childHtmlRehype?: Maybe<Pick<HtmlRehype, 'htmlAst'>>, category?: Maybe<Pick<MicrocmsPostsCategory, 'name_for_url' | 'name'>>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'id' | 'name' | 'name_for_url'>>>> }
   )> };
 
 export type CategoryQueryVariables = Exact<{
@@ -3598,7 +3612,31 @@ export type CategoryQueryVariables = Exact<{
 export type CategoryQuery = { microcmsCategories?: Maybe<Pick<MicrocmsCategories, 'name'>>, allMicrocmsPosts: { edges: Array<{ node: (
         Pick<MicrocmsPosts, 'id' | 'postsId' | 'title' | 'body'>
         & { category?: Maybe<(
-          Pick<MicrocmsPostsCategory, 'name'>
+          Pick<MicrocmsPostsCategory, 'name' | 'image_bg_color'>
+          & { image?: Maybe<Pick<MicrocmsPostsCategoryImage, 'url'>> }
+        )>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'name' | 'id'>>>> }
+      ) }> } };
+
+export type TagQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type TagQuery = { microcmsTags?: Maybe<Pick<MicrocmsTags, 'name'>>, allMicrocmsPosts: { edges: Array<{ node: (
+        Pick<MicrocmsPosts, 'id' | 'postsId' | 'title' | 'body'>
+        & { category?: Maybe<(
+          Pick<MicrocmsPostsCategory, 'name' | 'image_bg_color'>
+          & { image?: Maybe<Pick<MicrocmsPostsCategoryImage, 'url'>> }
+        )>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'name' | 'id'>>>> }
+      ) }> } };
+
+export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PostsQuery = { allMicrocmsPosts: { edges: Array<{ node: (
+        Pick<MicrocmsPosts, 'id' | 'postsId' | 'title' | 'body'>
+        & { category?: Maybe<(
+          Pick<MicrocmsPostsCategory, 'name' | 'image_bg_color'>
           & { image?: Maybe<Pick<MicrocmsPostsCategoryImage, 'url'>> }
         )>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'name' | 'id'>>>> }
       ) }> } };

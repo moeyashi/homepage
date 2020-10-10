@@ -1,7 +1,7 @@
-import { AppBar, Container, Toolbar, Typography } from "@material-ui/core"
-import { Link } from "../components/atoms/Link"
+import { AppBar, Box, Button, Container, Toolbar, Typography } from "@material-ui/core"
+import { Link } from "gatsby-material-ui-components"
 import React, { FC } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link as GLink } from "gatsby"
 import type { HeaderQuery } from "../../types/graphql-types"
 
 export const Header: FC = () => {
@@ -20,10 +20,13 @@ export const Header: FC = () => {
       <Container>
         <Toolbar variant="dense" disableGutters>
           <Typography component="h1" variant="h6">
-            <Link to="/" color="inherit" variant="inherit">
+            <Link to="/" color="inherit" underline="none">
                 {data.site?.siteMetadata?.title || 'Title'}
             </Link>
           </Typography>
+          <Box ml={2}>
+            <Link to="/" color="inherit" underline="none">ブログ</Link>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { AppBar, Container, Grid, Toolbar, Typography } from "@material-ui/core";
 import { useStaticQuery, graphql } from "gatsby";
+import { Link } from "gatsby-material-ui-components"
 import type { FooterQuery } from "../../types/graphql-types";
-import { Link } from "./atoms/Link";
 
 export const Footer: FC = () => {
   const data: FooterQuery = useStaticQuery(graphql`
@@ -36,9 +36,6 @@ export const Footer: FC = () => {
             </Grid>
             <Grid item xs={12} style={{ marginBottom: 8 }}>
               <Link to="/" variant="h6" color="inherit" style={{ display: "block" }}>記事一覧</Link>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="h6">カテゴリ</Typography>
             </Grid>
             {data.allMicrocmsCategories.edges.map(edge => (
               <Grid key={edge.node.name_for_url} item xs={12}>

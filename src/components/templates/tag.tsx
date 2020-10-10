@@ -8,13 +8,13 @@
 import React, { FC } from "react"
 import { graphql } from "gatsby"
 
-import type { CategoryQuery } from "../../../types/graphql-types"
+import type { TagQuery } from "../../../types/graphql-types"
 import { Layout } from "../layout"
 import { SEO } from "../seo"
 import { Typography } from "@material-ui/core"
 import { PostCards } from "../organisms/posts"
 
-const Category: FC<{ data: CategoryQuery; }> = ({ data: { allMicrocmsPosts: { edges: posts }, microcmsCategories: { name } } }) => (
+const Category: FC<{ data: TagQuery; }> = ({ data: { allMicrocmsPosts: { edges: posts }, microcmsTags: { name } } }) => (
   <Layout>
     <SEO title={name} description={`${name}についての記事一覧`} lang="ja" />
     <Typography variant="h2">{name}</Typography>
@@ -25,11 +25,11 @@ const Category: FC<{ data: CategoryQuery; }> = ({ data: { allMicrocmsPosts: { ed
 export default Category
 
 export const query = graphql`
-  query Category($id: String!) {
-    microcmsCategories(categoriesId: {eq: $id}) {
+  query Tag($id: String!) {
+    microcmsTags(tagsId: {eq: $id}) {
       name
     }
-    allMicrocmsPosts(sort: {fields: publishedAt, order: DESC}, filter: {category: {id: {eq: $id}}}) {
+    allMicrocmsPosts(sort: {fields: publishedAt, order: DESC}, filter: {tags: {elemMatch: {id: {eq: $id}}}}) {
       edges {
         node {
           id

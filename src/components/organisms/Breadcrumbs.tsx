@@ -1,7 +1,7 @@
 import React, { FC } from "react"
-import type { BreadcrumbsProps as MUIBreadcrumbsProps } from "@material-ui/core"
 import { Breadcrumbs as MUIBreadcrumbs, Typography } from "@material-ui/core"
-import { Link } from "../atoms/Link"
+import { Link } from "gatsby-material-ui-components"
+import type { BreadcrumbsProps as MUIBreadcrumbsProps } from "@material-ui/core"
 
 export type BreadcrumbsProps = MUIBreadcrumbsProps & {
   items: {

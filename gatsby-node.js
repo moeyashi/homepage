@@ -31,6 +31,14 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        allMicrocmsTags {
+          edges {
+            node {
+              tagsId
+              name_for_url
+            }
+          }
+        }
       }
     `
   );
@@ -54,6 +62,15 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve('./src/components/templates/category.tsx'),
       context: {
         id: category.node.categoriesId,
+      },
+    });
+  });
+  result.data.allMicrocmsTags.edges.forEach((tag) => {
+    createPage({
+      path: `/blog/tags/${tag.node.name_for_url}`,
+      component: path.resolve('./src/components/templates/tag.tsx'),
+      context: {
+        id: tag.node.tagsId,
       },
     });
   });

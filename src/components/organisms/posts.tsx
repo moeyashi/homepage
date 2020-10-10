@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useStaticQuery, graphql, Link } from "gatsby"
-import { Card, CardContent, CardHeader, CardMedia, Divider, Grid, Typography } from "@material-ui/core";
-import { MicrocmsPosts, PostsQueryQuery } from "../../../types/graphql-types"
+import { Card, CardContent, CardMedia, Grid, Tooltip, Typography } from "@material-ui/core";
+import { PostsQueryQuery } from "../../../types/graphql-types"
 
 export type PostCardProps = {
   id: string;
@@ -9,6 +9,7 @@ export type PostCardProps = {
   body: string;
   category?: string;
   categoryImageURL?: string;  
+  categoryImageBackgroundColor?: string;
   tagnames?: string[];
 }
 
@@ -18,19 +19,24 @@ export const PostCard: FC<PostCardProps> = ({
   body,
   category,
   categoryImageURL,
+  categoryImageBackgroundColor = "#19857b",
   tagnames,
 }) => (
-  <Card>
-    <CardMedia component="picture" style={{ height: 120 }}>
-      <source srcSet={`${categoryImageURL}?h=120&fm=webp`} type="image/webp" />
-      <img src={`${categoryImageURL}?h=120`} alt="post category image" />
-    </CardMedia>
-    <CardContent>
-      <Typography variant="caption" style={{ marginBottom: 8 }}>{category} {tagnames.join(",")}</Typography>
-      <Typography variant="h3" style={{ marginBottom: 8, height: "2.334em", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden" }}>{title}</Typography>
-      <Typography noWrap>{body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')}</Typography>
-    </CardContent>
-  </Card>
+  <Tooltip title={title}>
+    <Card>
+      <CardMedia component="div" style={{ display: "flex", height: 120, justifyContent: "center", alignItems: "center", backgroundColor: categoryImageBackgroundColor }}>
+        <picture>
+          <source srcSet={`${categoryImageURL}?h=80&fm=webp`} type="image/webp" />
+          <img src={`${categoryImageURL}?h=80`} alt="post category image" />
+        </picture>
+      </CardMedia>
+      <CardContent>
+        <Typography variant="caption" noWrap style={{ marginBottom: 8 }}>{category} {tagnames.join(",")}</Typography>
+        <Typography variant="h3" style={{ marginBottom: 8, height: "2.334em", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 2, overflow: "hidden" }}>{title}</Typography>
+        <Typography noWrap>{body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')}</Typography>
+      </CardContent>
+    </Card>
+  </Tooltip>
 )
 
 export type PostCardsProps = {
@@ -48,6 +54,7 @@ export const PostCards: FC<PostCardsProps> = ({ posts }) => (
             body={edge.node.body}
             category={edge.node.category.name}
             categoryImageURL={edge.node.category.image?.url}
+            categoryImageBackgroundColor={edge.node.category?.image_bg_color}
             tagnames={edge.node.tags.map(tag => tag.name)}
           />
         </Link>
@@ -71,6 +78,7 @@ export const Posts: FC = () => {
               image {
                 url
               }
+              image_bg_color
             }
             tags {
               name
