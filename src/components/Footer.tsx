@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import nprogress from "nprogress"
 import { AppBar, Container, Grid, Toolbar, Typography } from "@material-ui/core";
 import { useStaticQuery, graphql } from "gatsby";
 import { Link } from "gatsby-material-ui-components"
@@ -30,16 +31,16 @@ export const Footer: FC = () => {
         <Toolbar variant="dense" disableGutters>
           <Grid container style={{ paddingTop: "1rem", paddingBottom: "2rem" }}>
             <Grid item xs={12} style={{ marginBottom: 16 }}>
-              <Link to="/" variant="h4" color="inherit" style={{ display: "block" }}>
+              <Link to="/" variant="h4" color="inherit" onClick={nprogress.start} style={{ display: "block" }}>
                 {data.site?.siteMetadata?.title || "Title"}
               </Link>
             </Grid>
             <Grid item xs={12} style={{ marginBottom: 8 }}>
-              <Link to="/" variant="h6" color="inherit" style={{ display: "block" }}>記事一覧</Link>
+              <Link to="/" variant="h6" color="inherit" onClick={nprogress.start} style={{ display: "block" }}>記事一覧</Link>
             </Grid>
             {data.allMicrocmsCategories.edges.map(edge => (
               <Grid key={edge.node.name_for_url} item xs={12}>
-                <Link to={`/blog/categories/${edge.node.name_for_url}`} variant="body1" color="inherit" style={{ display: "block", paddingLeft: 16, paddingTop: 4, paddingBottom: 4 }}>{edge.node.name}</Link>
+                <Link to={`/blog/categories/${edge.node.name_for_url}`} variant="body1" color="inherit" onClick={nprogress.start} style={{ display: "block", paddingLeft: 16, paddingTop: 4, paddingBottom: 4 }}>{edge.node.name}</Link>
               </Grid>
             ))}
             <Grid item xs={12} style={{ paddingTop: "2rem" }}>

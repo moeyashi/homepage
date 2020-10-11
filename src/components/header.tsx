@@ -1,7 +1,8 @@
-import { AppBar, Box, Button, Container, Toolbar, Typography } from "@material-ui/core"
+import { AppBar, Box, Container, Toolbar, Typography } from "@material-ui/core"
 import { Link } from "gatsby-material-ui-components"
 import React, { FC } from "react"
-import { graphql, useStaticQuery, Link as GLink } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
+import nprogress from "nprogress"
 import type { HeaderQuery } from "../../types/graphql-types"
 
 export const Header: FC = () => {
@@ -20,12 +21,12 @@ export const Header: FC = () => {
       <Container>
         <Toolbar variant="dense" disableGutters>
           <Typography component="h1" variant="h6">
-            <Link to="/" color="inherit" underline="none">
+            <Link to="/" color="inherit" underline="none" onClick={nprogress.start}>
                 {data.site?.siteMetadata?.title || 'Title'}
             </Link>
           </Typography>
           <Box ml={2}>
-            <Link to="/" color="inherit" underline="none">ブログ</Link>
+            <Link to="/" color="inherit" underline="none" onClick={nprogress.start}>ブログ</Link>
           </Box>
         </Toolbar>
       </Container>

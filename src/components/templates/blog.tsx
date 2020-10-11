@@ -19,6 +19,7 @@ import { Layout } from "../layout"
 import { SEO } from "../seo"
 import { Box, Chip } from "@material-ui/core"
 import { Breadcrumbs } from "../organisms/Breadcrumbs"
+import nprogress from "nprogress"
 
 const addDataToTwitterWidget: Plugin = () => {
   return function(tree) {
@@ -64,7 +65,7 @@ const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex' }}>
             {post.tags?.map(tag => (
               <li key={tag.name} style={{ margin: 4 }}>
-                <Chip size="small" label={tag.name} component={GLink} to={`/blog/tags/${tag.name_for_url}`} clickable />
+                <Chip size="small" label={tag.name} component={GLink} to={`/blog/tags/${tag.name_for_url}`} clickable onClick={nprogress.start} />
               </li>
             ))}
           </ul>

@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import nprogress from "nprogress"
 import { Breadcrumbs as MUIBreadcrumbs, Typography } from "@material-ui/core"
 import { Link } from "gatsby-material-ui-components"
 import type { BreadcrumbsProps as MUIBreadcrumbsProps } from "@material-ui/core"
@@ -16,7 +17,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({ items }) => {
     <MUIBreadcrumbs separator=">" aria-label="breadcrumb">
       {items.map((item, idx) => !!item.to && idx !== lastIdx
         ? (
-          <Link key={`Breadcrumbs-${idx}`} to={item.to} color="inherit">
+          <Link key={`Breadcrumbs-${idx}`} to={item.to} color="inherit" onClick={nprogress.start}>
               {item.text}
           </Link>
         )

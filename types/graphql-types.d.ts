@@ -3578,17 +3578,6 @@ export type HeaderQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type HeaderQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
-export type PostsQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PostsQueryQuery = { allMicrocmsPosts: { edges: Array<{ node: (
-        Pick<MicrocmsPosts, 'id' | 'postsId' | 'title' | 'body'>
-        & { category?: Maybe<(
-          Pick<MicrocmsPostsCategory, 'name' | 'image_bg_color'>
-          & { image?: Maybe<Pick<MicrocmsPostsCategoryImage, 'url'>> }
-        )>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'name' | 'id'>>>> }
-      ) }> } };
-
 export type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 

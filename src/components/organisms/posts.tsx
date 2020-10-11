@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import { useStaticQuery, graphql, Link } from "gatsby"
+import nprogress from "nprogress"
+import { Link } from "gatsby"
 import { Card, CardContent, CardMedia, Grid, Tooltip, Typography } from "@material-ui/core";
 import { PostsQueryQuery } from "../../../types/graphql-types"
 
@@ -47,7 +48,7 @@ export const PostCards: FC<PostCardsProps> = ({ posts }) => (
   <Grid container spacing={2}>
     {posts.map(edge => (
       <Grid item key={edge.node.postsId} xs={12} md={4}>
-        <Link to={`/blog/posts/${edge.node.postsId}`} style={{ textDecoration: "none" }}>
+        <Link to={`/blog/posts/${edge.node.postsId}`} onClick={nprogress.start} style={{ textDecoration: "none" }}>
           <PostCard
             id={edge.node.postsId}
             title={edge.node.title}
@@ -62,39 +63,3 @@ export const PostCards: FC<PostCardsProps> = ({ posts }) => (
     ))}
   </Grid>
 )
-
-export const Posts: FC = () => {
-  const data: PostsQueryQuery = useStaticQuery(graphql`
-    query PostsQuery {
-      allMicrocmsPosts(sort: {fields: publishedAt, order: DESC}) {
-        edges {
-          node {
-            id
-            postsId
-            title
-            body
-            category {
-              name
-              image {
-                url
-              }
-              image_bg_color
-            }
-            tags {
-              name
-              id
-            }
-          }
-        }
-      }
-    }
-  `)
-
-  return (
-    <div>
-      <Typography variant="h2">記事一覧</Typography>
-      <PostCards posts={data.allMicrocmsPosts.edges} />
-    </div>
-  )
-
-}
