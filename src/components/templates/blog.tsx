@@ -36,6 +36,14 @@ const Script: FC = () => {
   return null
 }
 
+const Img: FC<any> = ({ src, style, ...props }) => {
+  const _src = src.startsWith("https://images.microcms-assets.io") ? `${src.split("?")[0]}?height=500px` : src
+  const _style = { ...style, maxWidth: "100%", maxHeight: "50vh" }
+  return (
+    <img src={_src} style={_style} {...props} />
+  )
+}
+
 const processor = unified()
   .use(rehype, { fragment: true })
   .use(hljs, {
@@ -45,7 +53,7 @@ const processor = unified()
     }
   })
   .use(addDataToTwitterWidget)
-  .use(rehype2react, { createElement, components: { script: Script } })
+  .use(rehype2react, { createElement, components: { script: Script, img: Img } })
 
 const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
 
