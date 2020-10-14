@@ -25,22 +25,28 @@ export const Footer: FC = () => {
     }
   `)
 
+  const handleLinkClick = (to: string) => () => {
+    if (location?.pathname != to) {
+      nprogress.start()
+    }
+  }
+
   return (
     <AppBar color="secondary" position="relative" elevation={0}>
       <Container>
         <Toolbar variant="dense" disableGutters>
           <Grid container style={{ paddingTop: "1rem", paddingBottom: "2rem" }}>
             <Grid item xs={12} style={{ marginBottom: 16 }}>
-              <Link to="/" variant="h4" color="inherit" onClick={nprogress.start} style={{ display: "block" }}>
+              <Link to="/" variant="h4" color="inherit" onClick={handleLinkClick("/")} style={{ display: "block" }}>
                 {data.site?.siteMetadata?.title || "Title"}
               </Link>
             </Grid>
             <Grid item xs={12} style={{ marginBottom: 8 }}>
-              <Link to="/" variant="h6" color="inherit" onClick={nprogress.start} style={{ display: "block" }}>記事一覧</Link>
+              <Link to="/" variant="h6" color="inherit" onClick={handleLinkClick("/")} style={{ display: "block" }}>記事一覧</Link>
             </Grid>
             {data.allMicrocmsCategories.edges.map(edge => (
               <Grid key={edge.node.name_for_url} item xs={12}>
-                <Link to={`/blog/categories/${edge.node.name_for_url}`} variant="body1" color="inherit" onClick={nprogress.start} style={{ display: "block", paddingLeft: 16, paddingTop: 4, paddingBottom: 4 }}>{edge.node.name}</Link>
+                <Link to={`/blog/categories/${edge.node.name_for_url}`} variant="body1" color="inherit" onClick={handleLinkClick(`/blog/categories/${edge.node.name_for_url}`)} style={{ display: "block", paddingLeft: 16, paddingTop: 4, paddingBottom: 4 }}>{edge.node.name}</Link>
               </Grid>
             ))}
             <Grid item xs={12} style={{ paddingTop: "2rem" }}>

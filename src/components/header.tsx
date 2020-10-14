@@ -16,17 +16,23 @@ export const Header: FC = () => {
     }
   `)
 
+  const handleLinkClick = (to: string) => () => {
+    if (location?.pathname != to) {
+      nprogress.start()
+    }
+  }
+
   return (
     <AppBar position="relative" elevation={0}>
       <Container>
         <Toolbar variant="dense" disableGutters>
           <Typography component="h1" variant="h6">
-            <Link to="/" color="inherit" underline="none" onClick={nprogress.start}>
+            <Link to="/" color="inherit" underline="none" onClick={handleLinkClick("/")}>
                 {data.site?.siteMetadata?.title || 'Title'}
             </Link>
           </Typography>
           <Box ml={2}>
-            <Link to="/" color="inherit" underline="none" onClick={nprogress.start}>ブログ</Link>
+            <Link to="/" color="inherit" underline="none" onClick={handleLinkClick("/")}>ブログ</Link>
           </Box>
         </Toolbar>
       </Container>
