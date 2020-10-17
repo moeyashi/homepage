@@ -3589,7 +3589,7 @@ export type BlogQueryVariables = Exact<{
 
 
 export type BlogQuery = { microcmsPosts?: Maybe<(
-    Pick<MicrocmsPosts, 'title' | 'body'>
+    Pick<MicrocmsPosts, 'title' | 'body' | 'createdAt' | 'updatedAt'>
     & { childHtmlRehype?: Maybe<Pick<HtmlRehype, 'htmlAst'>>, category?: Maybe<Pick<MicrocmsPostsCategory, 'name_for_url' | 'name'>>, tags?: Maybe<Array<Maybe<Pick<MicrocmsPostsTags, 'id' | 'name' | 'name_for_url'>>>> }
   )> };
 

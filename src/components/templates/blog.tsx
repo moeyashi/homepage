@@ -17,7 +17,7 @@ import visit from "unist-util-visit"
 import type { BlogQuery } from "../../../types/graphql-types"
 import { Layout } from "../layout"
 import { SEO } from "../seo"
-import { Box, Chip } from "@material-ui/core"
+import { Box, Chip, Typography } from "@material-ui/core"
 import { Breadcrumbs } from "../organisms/Breadcrumbs"
 import nprogress from "nprogress"
 
@@ -68,7 +68,8 @@ const Blog: FC<{data: BlogQuery; }> = ({ data: { microcmsPosts: post } }) => {
       <SEO title={post.title} description={post.body?.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')} lang="ja" />
       <div>
         <Box my={2}><Breadcrumbs items={breadItems} /></Box>
-        <h2>{post.title}</h2>
+        <Typography variant="h2">{post.title}</Typography>
+        <Typography variant="caption">作成: {post.createdAt} {post.createdAt !== post.updatedAt && `更新: ${post.updatedAt}`}</Typography>
         <Box my={2}>
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex' }}>
             {post.tags?.map(tag => (
@@ -107,6 +108,8 @@ export const query = graphql`
        name
        name_for_url
      }
+     createdAt(formatString: "yyyy/MM/DD")
+     updatedAt(formatString: "yyyy/MM/DD")
    }
  }
 `

@@ -19,13 +19,13 @@ const theme = createMuiTheme({
   },
   typography: {
     h2: {
-      fontSize: "1.75rem",
+      fontSize: "1.5rem",
       fontWeight: 700,
       marginBlockStart: "0.75em",
       marginBlockEnd: "0.5em"
     },
     h3: {
-      fontSize: "1.5rem",
+      fontSize: "1.17rem",
       fontWeight: 700
     }
   }
